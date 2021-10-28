@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import SeasonDisplay from './SeasonDisplay'
+import Spinner from './Spinner'
 
 class App extends React.Component {
             
@@ -13,8 +14,8 @@ class App extends React.Component {
         )
     }
 
-    render(){
-
+    // this content was removed from render function - logic should be outside of render
+    pageContent() {
         if(this.state.errorMessage && !this.state.lat){
             return <div>Error: {this.state.errorMessage}</div>
         }
@@ -23,7 +24,16 @@ class App extends React.Component {
             return <SeasonDisplay lat={this.state.lat}/>
         }
 
-        return <div>loading...</div>
+        return <div><Spinner message="Please accept location request"/></div>
+    }
+
+    render(){
+        return(
+            <div className="borderRed">
+                {this.pageContent()}
+            </div>
+        )
+        
     }
     
 }
